@@ -14,6 +14,7 @@ glucose.cma: lib_standard.a glucoseWrap.o glucose.cmo
 	ocamlc -a -custom $^ -o glucose.cma -cclib "-lstdc++"
 
 lib_standard.a:
+	@echo "Making Glucose library (called $@) in $(GLUCOSEDIR)/parallel"
 	cd $(GLUCOSEDIR)/parallel && make libs
 	mv $(GLUCOSEDIR)/parallel/$@ $@
 
@@ -30,4 +31,4 @@ solver.cmo: solver.ml glucose.cmi
 	ocamlc -c solver.ml
 
 clean:
-	rm -f *.o *.cmo *.cma *.cmi *~ solver
+	rm -f *.o *.cmo *.cma *.cmi *~ solver lib*.a
