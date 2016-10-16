@@ -8,9 +8,9 @@
 PWD        = $(shell pwd)
 EXEC      ?= $(notdir $(PWD))
 
-CSRCS      = $(wildcard $(PWD)/*.cc)
+CSRCS      = $(wildcard *.cc)
 DSRCS      = $(foreach dir, $(DEPDIR), $(filter-out $(MROOT)/$(dir)/Main.cc, $(wildcard $(MROOT)/$(dir)/*.cc)))
-CHDRS      = $(wildcard $(PWD)/*.h)
+CHDRS      = $(wildcard *.h)
 COBJS      = $(CSRCS:.cc=.o) $(DSRCS:.cc=.o)
 
 PCOBJS     = $(addsuffix p,  $(COBJS))
@@ -95,7 +95,7 @@ clean:
 depend.mk: $(CSRCS) $(CHDRS)
 	@echo Making dependencies
 	@$(CXX) $(CFLAGS) -I$(MROOT) \
-	   $(CSRCS) -MM | sed 's|\(.*\):|$(PWD)/\1 $(PWD)/\1r $(PWD)/\1d $(PWD)/\1p:|' > depend.mk
+	   $(CSRCS) -MM | sed 's|\(.*\):|\1 \1r \1d \1p:|' > depend.mk
 	@for dir in $(DEPDIR); do \
 	      if [ -r $(MROOT)/$${dir}/depend.mk ]; then \
 		  echo Depends on: $${dir}; \
