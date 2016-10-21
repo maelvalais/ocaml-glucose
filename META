@@ -1,0 +1,12 @@
+# OASIS_START
+# DO NOT EDIT (digest: 8c0f5bdce5331f46572bcb7588082364)
+version = "0.1"
+description = "This package is a compiler to the DIMACS file format"
+requires = "menhirLib fileutils str"
+archive(byte) = "glucose.cma"
+archive(byte, plugin) = "glucose.cma"
+archive(native) = "glucose.cmxa"
+archive(native, plugin) = "glucose.cmxs"
+exists_if = "glucose.cma"
+# OASIS_STOP
+
